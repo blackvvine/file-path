@@ -117,6 +117,12 @@ class FilePath(object):
             for f in files:
                 yield dfp + fp(f)
 
+    def __str__(self):
+        return self.path()
+
+    def __unicode__(self):
+        return self.path()
+
 
 class FilePathWithHelper(object):
 
