@@ -4,6 +4,7 @@ import random as rnd
 import re
 import shutil
 import logging
+import subprocess
 from enum import Enum
 
 
@@ -94,11 +95,27 @@ class FilePath(object):
         """
         shutil.rmtree(self.mpath)
 
-    def str(self):
+    def basename(self):
         """
         File/directory name of this FilePath
         """
         return os.path.basename(self.mpath)
+
+    def path(self):
+        """
+        Print full path
+        """
+        return self.mpath
+
+    def find_files(self):
+        """
+        Do an equivalent of find in bash, listing all files in a
+        directory tree
+        """
+        for dir, subdirs, files in os.walk(self.mpath):
+            dfp = FilePath(dir)
+            for f in files:
+                yield dfp + fp(f)
 
 
 class FilePathWithHelper(object):
@@ -120,4 +137,6 @@ def fp(mpath):
     """
     Alias for FilePath constructor
     """
+    if isinstance(mpath, FilePath):
+        return FilePath(mpath.mpath)
     return FilePath(mpath)
