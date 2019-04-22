@@ -116,6 +116,20 @@ class FilePath(object):
             dfp = fp(dir)
             for f in files:
                 yield dfp + fp(f)
+    
+    def is_dir(self):
+        return os.path.isdir(self.mpath)
+    
+    def is_file(self):
+        return os.path.isfile(self.mpath)
+
+    def ext(self):
+        if self.is_dir():
+            raise Exception("Illegal operation extension for directory")
+        sp = self.basename().split(".")
+        if len(sp) == 1:
+            return ''
+        return sp[-1]
 
     def __str__(self):
         return self.path()

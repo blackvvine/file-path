@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='file-path',
     packages=['filepath'],
-    version='0.1c',
+    version='0.2',
     description='Object-oriented wrapper for paths',
     author='Iman Akbari',
     author_email='imakbari@gmail.com',
